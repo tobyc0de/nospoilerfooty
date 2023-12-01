@@ -1,0 +1,50 @@
+body {
+	background-color: rgb(49, 49, 49);
+	color: #fff;
+}
+
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#datebuttons {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	margin-bottom: 50px;
+	gap: 20px;
+}
+
+td {
+	padding: 10px 20px;
+}
+
+#gamestable {
+	background-color: rgb(124, 124, 124);
+	font-size: small;
+}
+
+td img {
+	max-width: 50px;
+}
+
+.hidden {
+	display: none;
+}
+
+.showscore {
+	display: inherit;
+	font-size: larger;
+}
+
+tr {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 3fr 1fr 3fr;
+	align-items: center;
+}

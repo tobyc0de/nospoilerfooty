@@ -58,3 +58,9 @@ button {
 	color: white;
 	border-radius: 5px;
 }
+
+.showdetails {
+	display: flex;
+	justify-content: center;
+	background-color: darkgreen;
+}

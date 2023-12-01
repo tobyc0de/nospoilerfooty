@@ -1,0 +1,7 @@
+{
+	"version": 2,
+	"builds": [
+		{ "src": "/client", "use": "@vercel/vite" },
+		{ "src": "/server", "use": "@vercel/node" }
+	]
+}

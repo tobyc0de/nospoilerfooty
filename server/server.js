@@ -13,8 +13,8 @@ async function getFixtures(date) {
 		url: "https://api-football-v1.p.rapidapi.com/v3/fixtures",
 		params: { date: date },
 		headers: {
-			"X-RapidAPI-Key": "a18441b5bfmsh54707e1fa8f757cp18855djsn09278f2f9abf",
-			"X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
+			"X-RapidAPI-Key": process.env.RAPIDAPI_KEY,
+			"X-RapidAPI-Host": process.env.RAPIDAPI_HOST,
 		},
 	};
 

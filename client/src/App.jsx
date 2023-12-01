@@ -16,7 +16,7 @@ function App() {
 	}, [selectedDate]);
 
 	async function getFixtures(selectedDate) {
-		const API = `http://localhost:8080/fixturesbydate?date=${selectedDate}`;
+		const API = `nospoilerfooty-yjcy.vercel.app/fixturesbydate?date=${selectedDate}`;
 		const res = await axios.get(API);
 		setFixtures(res.data);
 		hideAllScores();

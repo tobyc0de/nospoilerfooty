@@ -20,7 +20,7 @@ body {
 	border: 10px solid rgba(255, 255, 255, 0.714);
 	border-radius: 4px;
 	background-color: #1e3708d2;
-	background: url("grass.webp");
+	background: url("/grass.webp");
 	background-size: cover;
 }
 

@@ -117,7 +117,7 @@ function App() {
 						);
 					}}
 				>
-					-
+					⇐
 				</div>
 
 				<div id="selecteddate">{selectedDate}</div>
@@ -129,9 +129,8 @@ function App() {
 						);
 					}}
 				>
-					+
+					⇒
 				</div>
-				<br />
 			</div>
 			<div>
 				<GamesTable

@@ -30,7 +30,7 @@ export default function GamesTable({
 									{/* // League Logo */}
 									<img src={fixture.league.logo} alt={fixture.league.name} />
 									<div
-										class="showstandingsbutton"
+										className="showstandingsbutton"
 										onClick={() => {
 											setSelectedLeague(fixture.league.id);
 											setPopupStatus(true);

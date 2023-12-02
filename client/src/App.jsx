@@ -3,10 +3,13 @@ import "./App.css";
 import axios from "axios";
 import moment from "moment";
 moment().format();
+import LeagueStandingsPopup from "./components/LeagueStandingsPopup";
 
 function App() {
-	const tomorrow = moment().add(1, "days").format("YYYY-MM-DD");
+	const [selectedLeague, setSelectedLeague] = useState();
+	const [selectedLeagueStandings, setSelectedLeagueStandings] = useState();
 	const [fixtures, setFixtures] = useState([]);
+	const [popupStatus, setPopupStatus] = useState(false);
 	const [selectedDate, setSelectedDate] = useState(
 		moment().format("YYYY-MM-DD")
 	);
@@ -14,6 +17,22 @@ function App() {
 	useEffect(() => {
 		getFixtures(selectedDate);
 	}, [selectedDate]);
+
+	useEffect(() => {
+		getLeagueStandings(selectedLeague);
+	}, [selectedLeague]);
+
+	useEffect(() => {
+		console.log(selectedLeagueStandings);
+	}, [selectedLeagueStandings]);
+
+	async function getLeagueStandings(leagueId) {
+		// const API = `https://nospoilerfooty-api.onrender.com/leaguebyid?league=${leagueId}`;
+		const API = `http://localhost:8080/leaguebyid?league=${leagueId}`;
+		const res = await axios.get(API);
+		await setSelectedLeagueStandings(res.data);
+		console.log(res.data);
+	}
 
 	async function getFixtures(selectedDate) {
 		const API = `https://nospoilerfooty-api.onrender.com/fixturesbydate?date=${selectedDate}`;
@@ -53,9 +72,6 @@ function App() {
 		let matchDetails = document.querySelector(`#matchdetails${i}`);
 		let matchDetailButton = document.querySelector(`#matchdetailsbutton${i}`);
 
-		console.log(`Clicked on details for match ${i}`);
-		console.log(matchDetails, matchDetailButton);
-
 		if (matchDetailButton) {
 			if (matchDetailButton.innerHTML === "show details") {
 				matchDetails.className = "showdetails";
@@ -73,11 +89,9 @@ function App() {
 		let allScores = document.querySelectorAll('[id^="score"]');
 		let allScoresButtons = document.querySelectorAll('[id^="scorebutton"]');
 		let showallscoresbutton = document.querySelector("#showallscoresbutton");
-
 		allScores.forEach((score) => {
 			score.className = "hidden";
 		});
-
 		allScoresButtons.forEach((button) => {
 			button.className = "scorebutton";
 		});
@@ -86,6 +100,12 @@ function App() {
 
 	return (
 		<>
+			{popupStatus && selectedLeagueStandings[0]?.league?.name && (
+				<LeagueStandingsPopup
+					selectedLeagueStandings={selectedLeagueStandings}
+					setPopupStatus={setPopupStatus}
+				/>
+			)}
 			<h1>Spoiler-Free Footy Fixtures</h1>
 			<div id="datebuttons">
 				<button
@@ -110,7 +130,6 @@ function App() {
 				</button>
 				<br />
 			</div>
-
 			<div>
 				<table id="gamestable">
 					<tbody>
@@ -135,9 +154,14 @@ function App() {
 								<>
 									<tr key={i}>
 										<td>
+											{/* // League Logo */}
 											<img
 												src={fixture.league.logo}
 												alt={fixture.league.name}
+												onClick={() => {
+													setSelectedLeague(fixture.league.id);
+													setPopupStatus(true);
+												}}
 											/>
 										</td>
 										<td>{fixture.fixture.date.slice(0, 10)}</td>
@@ -179,9 +203,7 @@ function App() {
 										</td>
 									</tr>
 									<tr id={`matchdetails${i}`} className="hidden">
-										<td>
-											{fixture.teams.home.name} VS {fixture.teams.away.name}
-										</td>
+										<td>Show goals with minutes and players here?</td>
 									</tr>
 								</>
 							))}

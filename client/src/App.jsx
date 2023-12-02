@@ -27,8 +27,8 @@ function App() {
 	}, [selectedLeagueStandings]);
 
 	async function getLeagueStandings(leagueId) {
-		// const API = `https://nospoilerfooty-api.onrender.com/leaguebyid?league=${leagueId}`;
-		const API = `http://localhost:8080/leaguebyid?league=${leagueId}`;
+		const API = `https://nospoilerfooty-api.onrender.com/leaguebyid?league=${leagueId}`;
+		// const API = `http://localhost:8080/leaguebyid?league=${leagueId}`;
 		const res = await axios.get(API);
 		await setSelectedLeagueStandings(res.data);
 		console.log(res.data);

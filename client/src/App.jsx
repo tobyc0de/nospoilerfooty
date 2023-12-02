@@ -5,6 +5,7 @@ import moment from "moment";
 moment().format();
 import LeagueStandingsPopup from "./components/LeagueStandingsPopup";
 import GamesTable from "./components/GamesTable";
+import DateSelector from "./components/DateSelector";
 
 function App() {
 	const [selectedLeague, setSelectedLeague] = useState();
@@ -108,30 +109,10 @@ function App() {
 				/>
 			)}
 			<h1>Spoiler-Free Footy Fixtures</h1>
-			<div id="datebuttons">
-				<div
-					className="datebutton"
-					onClick={() => {
-						setSelectedDate(
-							moment(selectedDate).add(-1, "days").format("YYYY-MM-DD")
-						);
-					}}
-				>
-					⇐
-				</div>
-
-				<div id="selecteddate">{selectedDate}</div>
-				<div
-					className="datebutton"
-					onClick={() => {
-						setSelectedDate(
-							moment(selectedDate).add(1, "days").format("YYYY-MM-DD")
-						);
-					}}
-				>
-					⇒
-				</div>
-			</div>
+			<DateSelector
+				selectedDate={selectedDate}
+				setSelectedDate={setSelectedDate}
+			/>
 			<div>
 				<GamesTable
 					showAllScores={showAllScores}

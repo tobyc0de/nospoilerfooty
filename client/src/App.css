@@ -1,6 +1,25 @@
 body {
 	background-color: rgb(0, 48, 0);
 	color: #fff;
+	scrollbar-width: thin;
+	scrollbar-color: white transparent;
+	font-family: "Farsan", sans-serif;
+}
+
+body::-webkit-scrollbar,
+#popup::-webkit-scrollbar {
+	width: 8px;
+}
+
+body::-webkit-scrollbar-thumb,
+#popup::-webkit-scrollbar-thumb {
+	background-color: white;
+	border-radius: 4px;
+}
+
+body::-webkit-scrollbar-track,
+#popup::-webkit-scrollbar-track {
+	background-color: transparent;
 }
 
 #root {
@@ -14,11 +33,19 @@ body {
 }
 
 #datebuttons {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
 	margin-bottom: 50px;
 	gap: 20px;
+	align-items: center;
+	width: max-content;
+	justify-items: center;
+	font-size: larger;
+}
+
+#selecteddate {
+	font-size: larger;
+	font-weight: 600;
 }
 
 td {
@@ -27,7 +54,7 @@ td {
 
 #gamestable {
 	background-color: rgb(23 89 0);
-	font-size: small;
+	padding: 10px;
 }
 
 td img {
@@ -45,18 +72,40 @@ td img {
 
 tr {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 2fr 1fr 2fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1.5fr 1fr 1.5fr;
 	align-items: center;
+	border-bottom: 1px dashed grey;
+	padding-bottom: 10px;
 }
 
-#showallscoresbutton {
+.showallscoresbutton,
+.scorebutton,
+.showstandingsbutton,
+.scorebutton,
+.matchdetailsbutton,
+.datebutton,
+.closepopupbutton {
 	width: max-content;
+	background-color: rgb(0, 48, 0);
+	color: rgb(231, 231, 231);
+	padding: 5px 10px;
+	border-radius: 5px;
+	box-shadow: 2px 1px rgb(31, 31, 31);
+	border: 1px solid rgb(124, 124, 124);
+	width: 100%;
 }
 
-button {
-	background-color: rgb(0, 48, 0);
-	color: white;
-	border-radius: 5px;
+.showallscoresbutton:hover,
+.scorebutton:hover,
+.showstandingsbutton:hover,
+.scorebutton:hover,
+.matchdetailsbutton:hover,
+.closepopupbutton:hover,
+.datebutton:hover {
+	background-color: rgb(231, 231, 231);
+	color: rgb(0, 48, 0);
+	cursor: pointer;
+	transition: 0.5s;
 }
 
 .showdetails {
@@ -66,15 +115,43 @@ button {
 }
 
 #popup {
-	position: absolute;
-	top: 10%;
-	left: auto;
 	background-color: rgba(0, 0, 0, 0.95);
-	padding: 5vh;
+	padding: 1vh;
+	width: 100%;
+	height: 100%;
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	justify-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	scrollbar-width: thin;
+	scrollbar-color: white transparent;
+	overflow-y: auto;
 }
 
 #popup table {
 	display: block;
+	width: 100%;
 	max-height: 80vh;
 	overflow: scroll;
+}
+
+#popuptable tr {
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#popup table::-webkit-scrollbar {
+	width: 8px; /* Set the width of the scrollbar */
+}
+
+#popup table::-webkit-scrollbar-thumb {
+	background-color: white; /* Color of the scrollbar thumb */
+	border-radius: 4px; /* Rounded corners for the thumb */
+}
+
+#popup table::-webkit-scrollbar-track {
+	background-color: transparent; /* Color of the scrollbar track */
 }

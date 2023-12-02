@@ -4,6 +4,7 @@ import axios from "axios";
 import moment from "moment";
 moment().format();
 import LeagueStandingsPopup from "./components/LeagueStandingsPopup";
+import GamesTable from "./components/GamesTable";
 
 function App() {
 	const [selectedLeague, setSelectedLeague] = useState();
@@ -108,7 +109,8 @@ function App() {
 			)}
 			<h1>Spoiler-Free Footy Fixtures</h1>
 			<div id="datebuttons">
-				<button
+				<div
+					className="datebutton"
 					onClick={() => {
 						setSelectedDate(
 							moment(selectedDate).add(-1, "days").format("YYYY-MM-DD")
@@ -116,10 +118,11 @@ function App() {
 					}}
 				>
 					-
-				</button>
+				</div>
 
-				<div>{selectedDate}</div>
-				<button
+				<div id="selecteddate">{selectedDate}</div>
+				<div
+					className="datebutton"
 					onClick={() => {
 						setSelectedDate(
 							moment(selectedDate).add(1, "days").format("YYYY-MM-DD")
@@ -127,88 +130,18 @@ function App() {
 					}}
 				>
 					+
-				</button>
+				</div>
 				<br />
 			</div>
 			<div>
-				<table id="gamestable">
-					<tbody>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
-								<button
-									className="showallscoresbutton"
-									id="showallscoresbutton"
-									onClick={() => (showAllScores(), console.log("clicked"))}
-								>
-									show all scores
-								</button>
-							</td>
-							<td></td>
-						</tr>
-						{fixtures.length > 0 &&
-							fixtures.map((fixture, i) => (
-								<>
-									<tr key={i}>
-										<td>
-											{/* // League Logo */}
-											<img
-												src={fixture.league.logo}
-												alt={fixture.league.name}
-												onClick={() => {
-													setSelectedLeague(fixture.league.id);
-													setPopupStatus(true);
-												}}
-											/>
-										</td>
-										<td>{fixture.fixture.date.slice(0, 10)}</td>
-										<td> {fixture.fixture.date.slice(11, 16)}</td>
-
-										<td>
-											<img
-												src={fixture.teams.home.logo}
-												alt={`${fixture.teams.home.name} logo`}
-											/>{" "}
-											<br /> {fixture.teams.home.name}
-										</td>
-										<button
-											className="scorebutton"
-											id={`scorebutton${i}`}
-											onClick={() => showScore(i)}
-										>
-											reveal score
-										</button>
-										<td className="hidden" id={`score${i}`}>
-											{fixture.score.fulltime.home} -{" "}
-											{fixture.score.fulltime.away}
-										</td>
-										<td>
-											<img
-												src={fixture.teams.away.logo}
-												alt={`${fixture.teams.away.name} logo`}
-											/>{" "}
-											<br /> {fixture.teams.away.name}
-										</td>
-										<td>
-											<div
-												id={`matchdetailsbutton${i}`}
-												className="matchdetailsbutton"
-												onClick={() => showMatchDetails(i)}
-											>
-												show details
-											</div>
-										</td>
-									</tr>
-									<tr id={`matchdetails${i}`} className="hidden">
-										<td>Show goals with minutes and players here?</td>
-									</tr>
-								</>
-							))}
-					</tbody>
-				</table>
+				<GamesTable
+					showAllScores={showAllScores}
+					fixtures={fixtures}
+					setSelectedLeague={setSelectedLeague}
+					setPopupStatus={setPopupStatus}
+					showScore={showScore}
+					showMatchDetails={showMatchDetails}
+				/>
 			</div>
 		</>
 	);

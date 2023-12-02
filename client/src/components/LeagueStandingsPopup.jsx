@@ -7,13 +7,16 @@ export default function LeagueStandingsPopup({
 		<div id="popup">
 			{selectedLeagueStandings[0]?.league?.name && (
 				<>
-					<button onClick={() => setPopupStatus(false)}>
+					<div
+						className="closepopupbutton"
+						onClick={() => setPopupStatus(false)}
+					>
 						Close this popup
-					</button>
+					</div>
 					<h2>
 						Current standings for {selectedLeagueStandings[0]?.league?.name}
 					</h2>
-					<table>
+					<table id="popuptable">
 						<thead>
 							<tr>
 								<th>Rank</th>
